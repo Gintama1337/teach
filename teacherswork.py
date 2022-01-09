@@ -1,4 +1,13 @@
 from random import randint
+##==//Работа с условными значениями//==
+aa = None
+aaa = 'str'
+# print(list(aaa))
+# if a == 5:
+#     print(True)
+# print(a == 5)
+# print(bool(a))
+
 #==//Работа с кортежами//==
 a = (1, 2, '3', 3)
 # print(a)
@@ -34,5 +43,32 @@ c = {'k':1, 'd':2, 'f':'3', 'g':4, 'h':5}
 # print(c.__sizeof__())
 
 #==//Работа с функциями//==
+a = 5
+def main(a, b):
+    if isinstance(a, str) or isinstance(b, str):
+    # if a or b == str: #if a=1=True or b!=str=False
+        return 'ты ввёл не то значение индюк'
+    else:
+        return (a + b) ** 2  # после return ничего не выполняется
+
+    # print((a+b)**2)
+print(main(1, 6))
+# print(isinstance(5, str))
+# print(bool(5))
+# main(5, 6)
+
+#==//Работа с рекурсиями//==
+#В РЕКУРСИИ ОБЯЗАТЕЛЬНО ДОЛЖНО БЫТЬ УКАЗАННО УСЛОВИЕ ЗАВЕРШЕНИЯ РЕКУРСИИ.
+#n! = факториал = 1*2*3*...*n
+def factorial(n):
+    factorial(n)
 
 
+
+# cc = 4
+# for i in range(1, c):
+    # c += i #c = c+i
+    # c *= i #c = c*i
+    # c /= i #c = c/i
+    # print(c)
+# print(c)
