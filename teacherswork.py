@@ -123,3 +123,11 @@ for i, j in enumerate(some_list):
 #ДЗ№3 Для цикла While: создать функцию на вход которой будет поступать список из randint
 #и он будет удалять элементы этого списка дор тех пор пока там не останеться 3 элемента
 
+from matplotlib import pyplot as plt #as это создание псевдонима для функция
+my_list = [2, 3, 4, 5, 6, 10]
+# plt.plot(my_list)
+# plt.show()
+#ДЗ№4 Нарисовать график синуса и косинуса из задачи 2
+import numpy as np
+plt.plot(np.sin(90))
+plt.show()
