@@ -69,7 +69,7 @@ def factorial(n:int)->int:
     2*factorial(n-1=1)
     1*factorial(n-1=0)
     factorial(0) return 1
-    4*3 *2*1*1"""
+    4*3*2*1*1"""
     if n == 0:
         return 1
     return n * factorial(n-1) # 4 * factorial(n-1=3) -> 12 *
@@ -103,7 +103,7 @@ def my_exception(a, b):
     except Exception:
         return 'долбаеб введи правильно'
 
-print(my_exception('ривет', 5))
+# print(my_exception('ривет', 5))
 
 
 try_find_my_exception = 3536
@@ -114,7 +114,7 @@ if try_find_my_exception != 1:
 #==//Работа с циклами//==
 some_list = [3, 4, '5']
 for i, j in enumerate(some_list):
-    print(i, j)
+    # print(i, j)
 #ДЗ№2 Для цикла for: создать функцию которая будет брать значение
 # из словаря и считать значение синуса каждого элемента этого словаря
 # а на выходе будет создавать копию словаря с теми же ключами но вместо значний синус этих значений
