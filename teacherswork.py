@@ -113,7 +113,7 @@ if try_find_my_exception != 1:
 
 #==//Работа с циклами//==
 some_list = [3, 4, '5']
-for i, j in enumerate(some_list):
+# for i, j in enumerate(some_list):
     # print(i, j)
 #ДЗ№2 Для цикла for: создать функцию которая будет брать значение
 # из словаря и считать значение синуса каждого элемента этого словаря
@@ -123,11 +123,43 @@ for i, j in enumerate(some_list):
 #ДЗ№3 Для цикла While: создать функцию на вход которой будет поступать список из randint
 #и он будет удалять элементы этого списка дор тех пор пока там не останеться 3 элемента
 
-from matplotlib import pyplot as plt #as это создание псевдонима для функция
-my_list = [2, 3, 4, 5, 6, 10]
-# plt.plot(my_list)
+# import numpy as np
+# from matplotlib import pyplot as plt #as это создание псевдонима для функция
+# x = np.arange(0, 2*np.pi, 0.1)
+# y = np.sin(x)
+# c = np.cos(x)
+# t = y/c
+# ct = 1/t
+# plt.plot(t)
+# # plt.plot(ct)
+# plt.plot(y)
+# plt.plot(c)
 # plt.show()
+#HW разобраться с sin cos tan cot и вывести графики
+
+
+
 #ДЗ№4 Нарисовать график синуса и косинуса из задачи 2
-import numpy as np
-plt.plot(np.sin(90))
-plt.show()
+
+# plt.plot(np.sin(90))
+# plt.show()
+# 90.*np.pi/180.
+
+# HW5
+# разобраться с ебучими **
+# разузнать про регулярные выражения
+
+# file = open("files/test.txt", 'a')
+# file.write('\nnahui ')
+# print(file.read())
+# file.close()
+
+# with open("files/test.txt", 'a') as f:
+#     f.write('\nlublu')
+import json
+with open("files/test2.json") as js:
+    data = json.load(js)
+    print(data)
+#HW 6
+# создать файлик users где будут клю = имя пользователя, а значение = пароль через randint
+#
