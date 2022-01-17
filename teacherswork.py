@@ -123,7 +123,7 @@ some_list = [3, 4, '5']
 #ДЗ№3 Для цикла While: создать функцию на вход которой будет поступать список из randint
 #и он будет удалять элементы этого списка дор тех пор пока там не останеться 3 элемента
 
-# import numpy as np
+import numpy as np
 # from matplotlib import pyplot as plt #as это создание псевдонима для функция
 # x = np.arange(0, 2*np.pi, 0.1)
 # y = np.sin(x)
@@ -135,6 +135,7 @@ some_list = [3, 4, '5']
 # plt.plot(y)
 # plt.plot(c)
 # plt.show()
+# print(x)
 #HW разобраться с sin cos tan cot и вывести графики
 
 
@@ -162,4 +163,19 @@ with open("files/test2.json") as js:
     print(data)
 #HW 6
 # создать файлик users где будут клю = имя пользователя, а значение = пароль через randint
-#
+# отсортировать словарь и отобрать там значения id
+
+test_string = "aaa mayonez ketchup huy suka blyad aaa dodik MANDA MagaZin"
+# search = input()
+# len_search = len(search)
+# index_start = test_string.find(search)
+# index_end = len_search + index_start
+# print(index_start, index_end, test_string[index_start:index_end])
+# test_string
+print(test_string + 'da')
+print(test_string)
+print('zelenii'*3 + ' her')
+# print(len('mayonez'))
+# print(test_string[test_string.rfind('mayonez'):test_string.rfind('mayonez')+len('mayonez')])
+#ДЗ7 добавить в имеющуюся строку слова с инпут и в верхнем регистре
+#ДЗ8 написать функцию которая будет считать колличество повторений слов если нет то 0, да 1 и т.п.
