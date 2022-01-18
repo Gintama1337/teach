@@ -1,5 +1,6 @@
 import numpy as np
 import re
+import random
 from random import randint
 from matplotlib import pyplot as plt
 
@@ -22,19 +23,19 @@ def hw_cycle(n:int)->int:
 #HW2
 
 hw_dict = {'el0':0, 'el1':30, 'el2':60, 'el3':80, 'el4':10, 'el5':90}
-# def hw_sin(hw_dict:dict)->dict:
-#     """
-#     Функция принимает словарь
-#     и высчитывает синус каждого значения
-#     этого словаря, а после возвращает
-#     копию этого списка с значениями равными
-#     синусом прошлых значений
-#     """
-#     for key in hw_dict:
-#         hw_dict[key] = np.sin(hw_dict[key]*np.pi/180)
-#         # print(key)
-#         # print(hw_dict[key])
-#     return hw_dict
+def hw_sin(hw_dict:dict)->dict:
+    """
+    Функция принимает словарь
+    и высчитывает синус каждого значения
+    этого словаря, а после возвращает
+    копию этого списка с значениями равными
+    синусом прошлых значений
+    """
+    for key in hw_dict:
+        hw_dict[key] = np.sin(hw_dict[key]*np.pi/180)
+        # print(key)
+        # print(hw_dict[key])
+    return hw_dict
 # print(hw_sin(hw_dict))
 # print(hw_dict['el3'])
 # print(hw_sin(hw_dict))
@@ -42,6 +43,7 @@ hw_dict = {'el0':0, 'el1':30, 'el2':60, 'el3':80, 'el4':10, 'el5':90}
 # print(*hw_dict)
 # dct = {'el7':[7, 5, 6]}
 # print(dct)
+
 #HW3
 
 def random_list_3el(j, t, p:int)->int:
@@ -73,9 +75,15 @@ def sin_cos_showoff(hw_dict:dict):
     return plt.show()
 # print(sin_cos_showoff(hw_dict))
 
+#HW6
+
+with open('files/usersID.json', 'a') as uID:
+    # uID.write(uID for key in randint(0,999999))
+    print((uID for key in random.choices(population='agdgeghsdh')), file=uID)
+
 #HW7
 
-test_string = "aaa mayonez suka ketchup huy suka blyad aaa dodik MANDA MagaZin "
+test_string = "aaa mayonez suka ketchup huy suka blyad aaa dodik MANDA MagaZin suka "
 # get_some_words_to_string = str(input())
 # test_string = test_string + get_some_words_to_string.upper()
 # print(test_string)
@@ -94,10 +102,8 @@ def repetition_finder(test_string:str)->list:
             continue
         elif repetition.count(i) >= 0:
             string_and_count.append(i)
-            if repetition.count(i) <= 1:
-                string_and_count.append(repetition.count(0))
-            else:
-                string_and_count.append(repetition.count(i))
+            repetition.remove(i)
+            string_and_count.append(repetition.count(i))
     return string_and_count
-print(repetition_finder(test_string))
+# print(repetition_finder(test_string))
 
