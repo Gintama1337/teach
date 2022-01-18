@@ -79,7 +79,25 @@ def sin_cos_showoff(hw_dict:dict):
 
 with open('files/usersID.json', 'a') as uID:
     # uID.write(uID for key in randint(0,999999))
-    print((uID for key in random.choices(population='agdgeghsdh')), file=uID)
+    # print((uID for key in random.choices(population='agdgeghsdh')), file=uID)
+    dict_from_uID = {'user1':'','user2':'','user3':'','user4':'','user5':''}
+    def dict_uID_with_randint_key(dict_from_uID:dict):
+        """
+        Функция принимает словарь и с помощью
+        цикла for добавляет случайное числовое значение
+        к каждому ключу, а после запиывает этот словарь
+        в файл userID.json
+        """
+        for key in dict_from_uID:
+            dict_from_uID[key] = randint(0, 999999)
+        return dict_from_uID
+    # print(dict_uID_with_randint_key(dict_from_uID), file=uID)
+    print(re.search('\w', 'files/usersID.json'))
+    print(uID.read())
+
+
+
+
 
 #HW7
 

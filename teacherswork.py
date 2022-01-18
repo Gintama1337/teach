@@ -164,6 +164,11 @@ with open("files/test2.json") as js:
 #HW 6
 # создать файлик users где будут клю = имя пользователя, а значение = пароль через randint
 # отсортировать словарь и отобрать там значения id
+# >>> d = {'a': 10, 'b': 15, 'c': 4}
+# >>> list_keys = list(d.keys())
+# >>> list_keys.sort()
+# >>> for i in list_keys:
+# ...     print(i, ':', d[i])
 
 test_string = "aaa mayonez ketchup huy suka blyad aaa dodik MANDA MagaZin"
 # search = input()
