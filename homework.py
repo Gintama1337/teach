@@ -46,7 +46,7 @@ def hw_sin(hw_dict:dict)->dict:
 
 #HW3
 
-def random_list_3el(j, t, p:int)->int:
+def random_list_3el(j, t, p:int)->list:
     """
     Функция создает случайный список и при помощи цикла While
     удаляет в нём значения до тех пор пока не останется 3 значения.
@@ -77,23 +77,34 @@ def sin_cos_showoff(hw_dict:dict):
 
 #HW6
 
+any_dict = {}
+for i in range(5):
+    key = input()
+    value = randint(0, 999999)
+    any_dict[key] = value
+
 with open('files/usersID.json', 'a') as uID:
+    print(any_dict, file=uID)
+    any_dict_sort = list(any_dict.keys())
+    any_dict_sort.sort()
+    for i in any_dict_sort:
+        print(i, ':', any_dict[i])
     # uID.write(uID for key in randint(0,999999))
     # print((uID for key in random.choices(population='agdgeghsdh')), file=uID)
-    dict_from_uID = {'user1':'','user2':'','user3':'','user4':'','user5':''}
-    def dict_uID_with_randint_key(dict_from_uID:dict):
-        """
-        Функция принимает словарь и с помощью
-        цикла for добавляет случайное числовое значение
-        к каждому ключу, а после запиывает этот словарь
-        в файл userID.json
-        """
-        for key in dict_from_uID:
-            dict_from_uID[key] = randint(0, 999999)
-        return dict_from_uID
+    # dict_from_uID = {'user1':'','user2':'','user3':'','user4':'','user5':''}
+    # def dict_uID_with_randint_key(dict_from_uID:dict):
+    #     """
+    #     Функция принимает словарь и с помощью
+    #     цикла for добавляет случайное числовое значение
+    #     к каждому ключу, а после запиывает этот словарь
+    #     в файл userID.json
+    #     """
+    #     for key in dict_from_uID:
+    #         dict_from_uID[key] = randint(0, 999999)
+    #     return dict_from_uID
     # print(dict_uID_with_randint_key(dict_from_uID), file=uID)
-    print(re.search('\w', 'files/usersID.json'))
-    print(uID.read())
+    # print(re.search('\w', 'files/usersID.json'))
+    # print(uID.read())
 
 
 
@@ -124,4 +135,15 @@ def repetition_finder(test_string:str)->list:
             string_and_count.append(repetition.count(i))
     return string_and_count
 # print(repetition_finder(test_string))
+
+#HW9
+
+#HW10
+
+any_list = [3, 6, 1, 5, 21]
+
+def sort_any_list(any_list:list)->list:
+    any_list.sort()
+    return any_list
+print (sort_any_list(any_list))
 
