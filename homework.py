@@ -77,18 +77,18 @@ def sin_cos_showoff(hw_dict:dict):
 
 #HW6
 
-any_dict = {}
-for i in range(5):
-    key = input()
-    value = randint(0, 999999)
-    any_dict[key] = value
-
-with open('files/usersID.json', 'a') as uID:
-    print(any_dict, file=uID)
-    any_dict_sort = list(any_dict.keys())
-    any_dict_sort.sort()
-    for i in any_dict_sort:
-        print(i, ':', any_dict[i])
+# any_dict = {}
+# for i in range(5):
+#     key = input()
+#     value = randint(0, 999999)
+#     any_dict[key] = value
+#
+# with open('files/usersID.json', 'a') as uID:
+#     print(any_dict, file=uID)
+#     any_dict_sort = list(any_dict.keys())
+#     any_dict_sort.sort()
+#     for i in any_dict_sort:
+#         print(i, ':', any_dict[i])
     # uID.write(uID for key in randint(0,999999))
     # print((uID for key in random.choices(population='agdgeghsdh')), file=uID)
     # dict_from_uID = {'user1':'','user2':'','user3':'','user4':'','user5':''}
@@ -147,5 +147,53 @@ any_list = [3, 6, 1, 5, 21]
 def sort_any_list(any_list:list)->list:
     any_list.sort()
     return any_list
-print (sort_any_list(any_list))
+# print (sort_any_list(any_list))
 
+#HW SBER
+
+black_list = [4, 2, 0, 3, 2, 5, 0, 1]
+water_list = []
+
+
+def highground_find(black_list:list)->list:
+    """
+    Функция принимает на вход список
+    и возвращает в новом списке
+    поочередные высоты входного списка
+    """
+    highground = []
+
+    highground.append(black_list[0])
+    t = 0
+    for i in range(1, len(black_list)-1):
+        if black_list[i] < highground[t]:
+            continue
+        elif black_list[i] >= highground[t]:
+            highground.append(black_list[i])
+            t += 1
+    highground.append(black_list[-1])
+
+
+
+
+    # for i in range(0, len(black_list)):
+    #     if black_list[i] < black_list[i + 1 - len(black_list)]:
+    #         continue
+    #     elif black_list[i] > black_list[i + 1 - len(black_list)] and black_list[i] > black_list[i-1]:
+    #         highground.append(black_list[i])
+    # if black_list[-1] != 0 and black_list[-1] != highground[-1]:
+    #     highground.append(black_list[-1])
+
+    # t = 0
+    # for i in range(0, len(black_list)):
+    #     if black_list[i] == highground[t]:
+    #         continue
+    #     elif
+
+
+
+    return highground
+
+
+
+print (highground_find(black_list))
