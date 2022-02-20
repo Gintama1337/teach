@@ -154,9 +154,6 @@ def sort_any_list(any_list:list)->list:
 black_list = [0, 4, 2, 0, 3, 2, 5]
 # 4, 2, 0, 3, 2, 5, 0, 1
 
-
-
-
 def waterline(black_list:list)->int:
     """
     Функция принимает на вход список
