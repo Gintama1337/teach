@@ -151,19 +151,31 @@ def sort_any_list(any_list:list)->list:
 
 #HW SBER
 
-black_list = [4, 2, 0, 3, 2, 5, 0, 1]
-water_list = []
+black_list = [0, 4, 2, 0, 3, 2, 5]
+# 4, 2, 0, 3, 2, 5, 0, 1
 
 
-def highground_find(black_list:list)->list:
+
+
+def waterline(black_list:list)->int:
     """
     Функция принимает на вход список
-    и возвращает в новом списке
-    поочередные высоты входного списка
+    и возвращает число заполненых пустот между
+    максимумов принимаемого списка
     """
     highground = []
+    water_list = 0
 
-    highground.append(black_list[0])
+
+    for i in range(len(black_list)):
+        if black_list[i] != 0:
+            highground.append(black_list[0])
+            break
+        else:
+            highground.append(black_list[1])
+            black_list.pop(black_list[i])
+            break
+
     t = 0
     for i in range(1, len(black_list)-1):
         if black_list[i] < highground[t]:
@@ -173,27 +185,18 @@ def highground_find(black_list:list)->list:
             t += 1
     highground.append(black_list[-1])
 
+    c = 0
+
+    for i in range(1, len(black_list)-1):
+        if highground[c+1 - len(highground)] == black_list[i]:
+            c += 1
+        elif highground[c - len(highground)] > highground[c+1 - len(highground)]:
+            c += 1
+            water_list += highground[c - len(highground)] - black_list[i - len(black_list)]
+        else:
+            water_list += highground[c - len(highground)] - black_list[i]
+
+    return water_list
 
 
-
-    # for i in range(0, len(black_list)):
-    #     if black_list[i] < black_list[i + 1 - len(black_list)]:
-    #         continue
-    #     elif black_list[i] > black_list[i + 1 - len(black_list)] and black_list[i] > black_list[i-1]:
-    #         highground.append(black_list[i])
-    # if black_list[-1] != 0 and black_list[-1] != highground[-1]:
-    #     highground.append(black_list[-1])
-
-    # t = 0
-    # for i in range(0, len(black_list)):
-    #     if black_list[i] == highground[t]:
-    #         continue
-    #     elif
-
-
-
-    return highground
-
-
-
-print (highground_find(black_list))
+print (waterline(black_list))
