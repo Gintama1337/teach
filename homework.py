@@ -138,7 +138,33 @@ def repetition_finder(test_string:str)->list:
 
 #HW9
 
+def kvur_withdiscr_ebanarot(a,b,c:int)->int:
+    """
+    Функция принимает на вход 3 значения и считает
+    дискриминант, если дискриминант меньше нуля,
+    возвращает None, если ноль или больше
+    возвращает корень/корни квадратного уравнения.
+    """
 
+    D = (b**2)-4*a*c
+    if D < 0:
+        return None
+    elif D == 0:
+        x = (-b) / (2 * a)
+        return x
+    elif D > 0:
+        x1 = (-b + (D ** (0.5))) / (2 * a)
+        x2 = (-b - (D ** (0.5))) / (2 * a)
+        return x1, x2
+x1 = [6]
+x2 = [-4]
+def kvur_graf(x1, x2):
+    plt.plot(x1)
+    plt.plot(x2)
+    return plt.show()
+
+print (kvur_withdiscr_ebanarot(1, -2, -24))
+print (kvur_graf(x1, x2))
 
 #HW10
 
@@ -149,51 +175,56 @@ def sort_any_list(any_list:list)->list:
     return any_list
 # print (sort_any_list(any_list))
 
+
+
+
 #HW SBER
 
-black_list = [0, 4, 2, 0, 3, 2, 5]
+black_list = [0, 1, 0, 2, 1, 0 ,1, 3, 2, 1, 2, 1]
 # 4, 2, 0, 3, 2, 5, 0, 1
 
-def waterline(black_list:list)->int:
-    """
-    Функция принимает на вход список
-    и возвращает число заполненых пустот между
-    максимумов принимаемого списка
-    """
-    highground = []
-    water_list = 0
+# def waterline(black_list:list)->int:
+# """
+# Функция принимает на вход список
+# и возвращает число заполненых пустот между
+# максимумов принимаемого списка
+# """
+highground = []
+water_list = 0
 
 
-    for i in range(len(black_list)):
-        if black_list[i] != 0:
-            highground.append(black_list[0])
-            break
-        else:
-            highground.append(black_list[1])
-            black_list.pop(black_list[i])
-            break
+for i in range(len(black_list)):
+    if black_list[i] != 0:
+        highground.append(black_list[0])
+        break
+    else:
+        highground.append(black_list[1])
+        black_list.pop(black_list[i])
+        break
 
-    t = 0
-    for i in range(1, len(black_list)-1):
-        if black_list[i] < highground[t]:
-            continue
-        elif black_list[i] >= highground[t]:
-            highground.append(black_list[i])
-            t += 1
-    highground.append(black_list[-1])
+t = 0
+for i in range(1, len(black_list)-1):
+    if black_list[i] < highground[t]:
+        continue
+    elif black_list[i] >= highground[t]:
+        highground.append(black_list[i])
+        t += 1
+highground.append(black_list[-1])
 
-    c = 0
+c = 0
 
-    for i in range(1, len(black_list)-1):
-        if highground[c+1 - len(highground)] == black_list[i]:
-            c += 1
-        elif highground[c - len(highground)] > highground[c+1 - len(highground)]:
-            c += 1
-            water_list += highground[c - len(highground)] - black_list[i - len(black_list)]
-        else:
-            water_list += highground[c - len(highground)] - black_list[i]
+for i in range(1, len(black_list)-1):
+    if highground[c+1 - len(highground)] == black_list[i]:
+        c += 1
+    elif highground[c - len(highground)] > highground[c+1 - len(highground)]:
+        c += 1
+        water_list += highground[c - len(highground)] - black_list[i - len(black_list)]
+    else:
+        water_list += highground[c - len(highground)] - black_list[i]
 
-    return water_list
+# return water_list
 
 
-print (waterline(black_list))
+print (water_list)
+
+#HW
