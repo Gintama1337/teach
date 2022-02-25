@@ -148,23 +148,23 @@ def positive_result(function):
             return "Уравнение не имеет корней"
         elif result == 0:
             x = (-b) / (2 * a)
-            return discr_result.append(x)
+            discr_result.append(x)
+            return discr(a, b, c, discr_result)
         elif result > 0:
-            x1 = (-b + (discr ** (0.5))) / (2 * a)
-            x2 = (-b - (discr ** (0.5))) / (2 * a)
-            return discr_result.append(x1)
+            x1 = (-b + (discr(*args,**kwargs) ** (0.5))) / (2 * a)
+            x2 = (-b - (discr(*args,**kwargs) ** (0.5))) / (2 * a)
+            discr_result.append(x1)
+            discr_result.append(x2)
+            return discr(a, b, c, discr_result)
         return result
     return wrapper
 
-
-
-# def discr(a:int,b:int,c:int)->int:
-#     """Считает дискриминант"""
-#
-#     return (b**2)-(4*a*c)
 @positive_result
-discr = lambda a, b, c : (b**2)+4*a*c
-discr(2,2,8)
+def discr(a:int,b:int,c:int, discr_result)->int:
+    """Считает дискриминант"""
+    return (b**2)-(4*a*c)
+# discr = lambda a, b, c : (b**2)+4*a*c
+# discr(2,2,8)
 # print (discr)
 # def kvur_withdiscr_ebanarot(discr:int)->int:
 #     """
@@ -190,7 +190,7 @@ discr(2,2,8)
 #     plt.plot(discr_result)
 #     return plt.show()
 
-print (discr(1, -2, -24))
+print (discr(1, -2, -24, discr_result))
 # print (kvur_graf(discr_result))
 
 #HW10
