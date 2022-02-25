@@ -137,34 +137,61 @@ def repetition_finder(test_string:str)->list:
 # print(repetition_finder(test_string))
 
 #HW9
+discr_result = []
+a = 1
+b = -2
+c = -24
+def positive_result(function):
+    def wrapper(*args, **kwargs):
+        result = function(*args,**kwargs)
+        if result < 0:
+            return "Уравнение не имеет корней"
+        elif result == 0:
+            x = (-b) / (2 * a)
+            return discr_result.append(x)
+        elif result > 0:
+            x1 = (-b + (discr ** (0.5))) / (2 * a)
+            x2 = (-b - (discr ** (0.5))) / (2 * a)
+            return discr_result.append(x1)
+        return result
+    return wrapper
 
-def kvur_withdiscr_ebanarot(a,b,c:int)->int:
-    """
-    Функция принимает на вход 3 значения и считает
-    дискриминант, если дискриминант меньше нуля,
-    возвращает None, если ноль или больше
-    возвращает корень/корни квадратного уравнения.
-    """
 
-    D = (b**2)-4*a*c
-    if D < 0:
-        return None
-    elif D == 0:
-        x = (-b) / (2 * a)
-        return x
-    elif D > 0:
-        x1 = (-b + (D ** (0.5))) / (2 * a)
-        x2 = (-b - (D ** (0.5))) / (2 * a)
-        return x1, x2
-x1 = [6]
-x2 = [-4]
-def kvur_graf(x1, x2):
-    plt.plot(x1)
-    plt.plot(x2)
-    return plt.show()
 
-print (kvur_withdiscr_ebanarot(1, -2, -24))
-print (kvur_graf(x1, x2))
+# def discr(a:int,b:int,c:int)->int:
+#     """Считает дискриминант"""
+#
+#     return (b**2)-(4*a*c)
+@positive_result
+discr = lambda a, b, c : (b**2)+4*a*c
+discr(2,2,8)
+# print (discr)
+# def kvur_withdiscr_ebanarot(discr:int)->int:
+#     """
+#     Функция принимает на вход 3 значения и считает
+#     дискриминант, если дискриминант меньше нуля,
+#     возвращает None, если ноль или больше
+#     возвращает корень/корни квадратного уравнения.
+#     """
+#
+#
+#     if discr < 0:
+#         return None
+#     elif discr == 0:
+#         x = (-b) / (2 * a)
+#         return x
+#     elif discr > 0:
+#         x1 = (-b + (D ** (0.5))) / (2 * a)
+#         x2 = (-b - (D ** (0.5))) / (2 * a)
+#         return quadratic_root
+
+
+# def kvur_graf(discr_result):
+#     plt.plot(discr_result)
+#     return plt.show()
+
+print (discr(1, -2, -24))
+# print (kvur_graf(discr_result))
 
 #HW10
 
