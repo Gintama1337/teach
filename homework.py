@@ -3,7 +3,7 @@ import re
 import random
 from random import randint
 from matplotlib import pyplot as plt
-
+import math
 #HW1
 
 def hw_cycle(n:int)->int:
@@ -137,45 +137,41 @@ def repetition_finder(test_string:str)->list:
 # print(repetition_finder(test_string))
 
 #HW9
-discr = lambda a, b, c : (b**2)-4*a*c
 
+a, b, c = 1, -2, -24
 quadratic_root = []
 
-def positive_result(function):
-    def wrapper(*args, **kwargs):
-        result = function(*args, **kwargs)
-        if result < 0:
-            return "Уравнение не имеет корней"
-        return result
-    wrapper.__name__ = function.__name__
-    wrapper.__doc__ = function.__doc__
-    return wrapper
+discr = lambda a, b, c : (b**2)-4*a*c
 
-@positive_result
-def kvur_withdiscr_ebanarot(discr)->int:
+def kvur_withdiscr(discr:int)->list:
     """
-    Функция принимает на вход 3 значения и считает
-    дискриминант, если дискриминант меньше нуля,
-    возвращает None, если ноль или больше
-    возвращает корень/корни квадратного уравнения.
+    Функция принимает на вход lambda функцию,
+    и в зависимости от значения это функции
+    выводит корень уравнения либо их список.
     """
-    if discr == 0:
+    if discr(a, b, c) < 0:
+        return "Уравнение не имеет корней"
+    elif (discr(a, b, c)) == 0:
         x = (-b) / (2 * a)
         return x
-    elif discr > 0:
-        x1 = (-b + (discr ** (0.5))) / (2 * a)
-        x2 = (-b - (discr ** (0.5))) / (2 * a)
-        quadratic_root.append(x1)
-        quadratic_root.append(x2)
+    elif (discr(a, b, c)) > 0:
+        x1 = (-b + ((discr(a, b, c)) ** (0.5))) / (2 * a)
+        x2 = (-b - ((discr(a, b, c)) ** (0.5))) / (2 * a)
+        quadratic_root.append(int(x1))
+        quadratic_root.append(int(x2))
         return quadratic_root
 
 
-# def kvur_graf(discr_result):
-#     plt.plot(discr_result)
-#     return plt.show()
+def kvur_graf(kvur_withdiscr:list):
+    """
+    Функция рисует график на основе данных
+    функции kvur_withdiscr
+    """
+    plt.plot(quadratic_root)
+    return plt.show()
 
-print (kvur_withdiscr_ebanarot(discr))
-# print (kvur_graf(discr_result))
+# print (kvur_withdiscr(discr))
+# print (kvur_graf(kvur_withdiscr))
 
 #HW10
 
@@ -236,6 +232,27 @@ for i in range(1, len(black_list)-1):
 # return water_list
 
 
-print (water_list)
+# print (water_list)
 
-#HW
+#HW 11
+
+def divide_in_percent(function):
+    def wrapper(*args,**kwargs):
+        result = function(*args,**kwargs)
+        if a < 0 or b < 0:
+            return "Числа должны быть положительные"
+        elif (result * 100) > 100:
+            return 100
+        elif (result * 100) >= 0 or (result * 100) <= 100:
+            return int(result * 100)
+        return result
+    return wrapper
+
+@divide_in_percent
+def divide(a:int, b:int)->int:
+    """
+    Делит 2 числа
+    """
+    return a/b
+
+print (divide(4, 8))
