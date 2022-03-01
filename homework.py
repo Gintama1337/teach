@@ -4,6 +4,9 @@ import random
 from random import randint
 from matplotlib import pyplot as plt
 import math
+from datetime import datetime
+import timeit
+
 #HW1
 
 def hw_cycle(n:int)->int:
@@ -268,4 +271,88 @@ for i in range(0, len(list_to_sort)):
             list_to_sort[i], list_to_sort[j] = list_to_sort[j], list_to_sort[i]
 # return list_to_sort
 
-print(list_to_sort)
+# print(list_to_sort)
+
+#HW 12.1 (моя сортировка(похожа на сортировку вставками))
+
+time_test1 = """
+list_to_sort = [9,2,7,1,3,6,9,0,1,5,4,7,9]
+for i in range(0, len(list_to_sort)):
+    for j in range(i+1, len(list_to_sort)):
+        if list_to_sort[i] > list_to_sort[j]:
+            list_to_sort[i], list_to_sort[j] = list_to_sort[j], list_to_sort[i]
+"""
+#~8-10 sec
+# print(timeit.timeit(time_test1))
+
+#HW 12.2 (ортировка вставками)
+
+time_test2 = """
+my_list = [9,2,7,1,3,6,9,0,1,5,4,7,9]
+for i in range(1,len(my_list)):
+    top = i-1
+    while top:
+        if my_list[top]<my_list[top-1]:
+            my_list[top-1],my_list[top]=my_list[top],my_list[top-1]
+        top-=1
+"""
+#~8-8.5 sec
+# print(timeit.timeit(time_test2))
+
+#HW 12.3 (Сортировка методом выбора)
+
+time_test3 = """
+my_list = [9,2,7,1,3,6,9,0,1,5,4,7,9]
+
+for i in range(len(my_list)-1):
+    for j in range(i+1, len(my_list)):
+        if my_list[j]<my_list[i]:
+            my_list[i],my_list[j]=my_list[j],my_list[i]
+"""
+#~8-9 sec
+# print(timeit.timeit(time_test3))
+
+#HW 12.4 (Сортировка пузырьками)
+
+time_test4 = """
+my_list = [9,2,7,1,3,6,9,0,1,5,4,7,9]
+
+for i in range(1,len(my_list)):
+    for j in range(0,len(my_list)-i):
+        if my_list[j]>my_list[j+1]:
+            my_list[j],my_list[j+1]=my_list[j+1],my_list[j]
+"""
+#~10-11 sec
+# print(timeit.timeit(time_test4))
+
+#HW 12.5 (Быстрая сортировка - сортировка Тони Хоара)
+
+time_test5 = """
+my_list = [9,2,7,1,3,6,9,0,1,5,4,7,9]
+def quick_sort(array:list)->list or None:
+    if len(array)<=1:
+        return
+    barrier=array[0]
+    L=[]
+    M=[]
+    R=[]
+    for elem in array:
+        if elem<barrier:
+            L.append(elem)
+        elif elem==barrier:
+            M.append(elem)
+        else:
+            R.append(elem)
+
+    quick_sort(L)
+    quick_sort(R)
+
+    k=0
+    for i in L+M+R:
+        array[k]=i
+        k+=1
+    return array
+"""
+#~0.2 sec
+# print(timeit.timeit(time_test5))
+
