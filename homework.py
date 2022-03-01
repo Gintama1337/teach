@@ -239,7 +239,7 @@ for i in range(1, len(black_list)-1):
 def divide_in_percent(function):
     def wrapper(*args,**kwargs):
         result = function(*args,**kwargs)
-        if a < 0 or b < 0:
+        if (result * 100) < 0:
             return "Числа должны быть положительные"
         elif (result * 100) > 100:
             return 100
@@ -255,4 +255,17 @@ def divide(a:int, b:int)->int:
     """
     return a/b
 
-print (divide(4, 8))
+# print (divide(3, 9))
+
+#HW 12
+
+list_to_sort = [5, 3, 6, 2, 5, 6]
+
+# def my_sort(list_to_sort:list)->list:
+for i in range(0, len(list_to_sort)):
+    for j in range(i+1, len(list_to_sort)):
+        if list_to_sort[i] > list_to_sort[j]:
+            list_to_sort[i], list_to_sort[j] = list_to_sort[j], list_to_sort[i]
+# return list_to_sort
+
+print(list_to_sort)
