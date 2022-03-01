@@ -171,22 +171,23 @@ def kvur_graf(kvur_withdiscr:list):
     функции kvur_withdiscr
     """
     plt.plot(quadratic_root)
-    return plt.show()
+    plt.show()
 
-# print (kvur_withdiscr(discr))
-# print (kvur_graf(kvur_withdiscr))
+print (kvur_withdiscr(discr))
+print (kvur_graf(kvur_withdiscr))
 
 #HW10
 
-any_list = [3, 6, 1, 5, 21]
+list_to_sort = [5, 3, 6, 2, 5, 6]
 
-def sort_any_list(any_list:list)->list:
-    any_list.sort()
-    return any_list
-# print (sort_any_list(any_list))
+# def my_sort(list_to_sort:list)->list:
+for i in range(0, len(list_to_sort)):
+    for j in range(i+1, len(list_to_sort)):
+        if list_to_sort[i] > list_to_sort[j]:
+            list_to_sort[i], list_to_sort[j] = list_to_sort[j], list_to_sort[i]
+# return list_to_sort
 
-
-
+# print(list_to_sort)
 
 #HW SBER
 
@@ -261,18 +262,6 @@ def divide(a:int, b:int)->int:
 # print (divide(3, 9))
 
 #HW 12
-
-list_to_sort = [5, 3, 6, 2, 5, 6]
-
-# def my_sort(list_to_sort:list)->list:
-for i in range(0, len(list_to_sort)):
-    for j in range(i+1, len(list_to_sort)):
-        if list_to_sort[i] > list_to_sort[j]:
-            list_to_sort[i], list_to_sort[j] = list_to_sort[j], list_to_sort[i]
-# return list_to_sort
-
-# print(list_to_sort)
-
 #HW 12.1 (моя сортировка(похожа на сортировку вставками))
 
 time_test1 = """
