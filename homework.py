@@ -142,17 +142,16 @@ def repetition_finder(test_string:str)->list:
 #HW9
 
 a, b, c = 1, -2, -24
-quadratic_root = []
 
 discr = lambda a, b, c : (b**2)-4*a*c
 
-def kvur_withdiscr(discr:int)->list:
+def kvur_withdiscr(discr)->(str, int):
     """
     Функция принимает на вход lambda функцию,
     и в зависимости от значения это функции
     выводит корень уравнения либо их список.
     """
-    if discr(a, b, c) < 0:
+    if (discr(a, b, c)) < 0:
         return "Уравнение не имеет корней"
     elif (discr(a, b, c)) == 0:
         x = (-b) / (2 * a)
@@ -160,21 +159,29 @@ def kvur_withdiscr(discr:int)->list:
     elif (discr(a, b, c)) > 0:
         x1 = (-b + ((discr(a, b, c)) ** (0.5))) / (2 * a)
         x2 = (-b - ((discr(a, b, c)) ** (0.5))) / (2 * a)
-        quadratic_root.append(int(x1))
-        quadratic_root.append(int(x2))
-        return quadratic_root
+        x = np.linspace(x1, x2)
+        return x
 
+x = kvur_withdiscr(discr)
 
-def kvur_graf(kvur_withdiscr:list):
+def kvur_graf(x):
     """
-    Функция рисует график на основе данных
-    функции kvur_withdiscr
+    Функция принимает на вход х
+    являющиеся результатом функции
+    kvur_withdiscr(discr) и рисует
+    график квадратичного уравнения
     """
-    plt.plot(quadratic_root)
-    plt.show()
+    if (discr(a, b, c)) < 0:
+        return
+    else:
+        # x = kvur_withdiscr(discr)
+        y = a * (x ** 2) + b * x + c
 
-print (kvur_withdiscr(discr))
-print (kvur_graf(kvur_withdiscr))
+        plt.plot(x, y)
+        plt.show()
+
+# print (kvur_withdiscr(discr))
+# print (kvur_graf(x))
 
 #HW10
 
@@ -186,13 +193,13 @@ for i in range(0, len(list_to_sort)):
         if list_to_sort[i] > list_to_sort[j]:
             list_to_sort[i], list_to_sort[j] = list_to_sort[j], list_to_sort[i]
 # return list_to_sort
-
 # print(list_to_sort)
 
 #HW SBER
 
-black_list = [0, 1, 0, 2, 1, 0 ,1, 3, 2, 1, 2, 1]
+black_list = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
 # 4, 2, 0, 3, 2, 5, 0, 1
+# 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1
 
 # def waterline(black_list:list)->int:
 # """
@@ -220,7 +227,15 @@ for i in range(1, len(black_list)-1):
     elif black_list[i] >= highground[t]:
         highground.append(black_list[i])
         t += 1
-highground.append(black_list[-1])
+
+for i in range(1, len(black_list)):
+    if black_list[-i] < black_list[-i - 1]:
+        highground.append(black_list[-i - 1])
+    else:
+        highground.append(black_list[-i])
+
+
+
 
 c = 0
 
@@ -233,10 +248,9 @@ for i in range(1, len(black_list)-1):
     else:
         water_list += highground[c - len(highground)] - black_list[i]
 
-# return water_list
 
 
-# print (water_list)
+print (water_list)
 
 #HW 11
 
@@ -248,18 +262,18 @@ def divide_in_percent(function):
         elif (result * 100) > 100:
             return 100
         elif (result * 100) >= 0 or (result * 100) <= 100:
-            return int(result * 100)
+            return result * 100
         return result
     return wrapper
 
 @divide_in_percent
-def divide(a:int, b:int)->int:
+def divide(a:int, b:int)->float:
     """
     Делит 2 числа
     """
-    return a/b
+    return (a/b)
 
-# print (divide(3, 9))
+# print (divide(5, 8))
 
 #HW 12
 #HW 12.1 (моя сортировка(похожа на сортировку вставками))
@@ -344,4 +358,5 @@ def quick_sort(array:list)->list or None:
 """
 #~0.2 sec
 # print(timeit.timeit(time_test5))
+
 
