@@ -141,47 +141,55 @@ def repetition_finder(test_string:str)->list:
 
 #HW9
 
-a, b, c = 1, -2, -24
+a, b, c = 1, -4, -48
 
-discr = lambda a, b, c : (b**2)-4*a*c
+discriminant = lambda a, b, c : (b**2)-4*a*c
+discr_res = discriminant(a, b, c)
 
-def kvur_withdiscr(discr)->(str, int):
+def kvur_withdiscr(discr:int)->np.ndarray or str:
     """
     Функция принимает на вход lambda функцию,
     и в зависимости от значения это функции
     выводит корень уравнения либо их список.
     """
-    if (discr(a, b, c)) < 0:
+    if discr < 0:
         return "Уравнение не имеет корней"
-    elif (discr(a, b, c)) == 0:
+    elif discr == 0:
         x = (-b) / (2 * a)
         return x
-    elif (discr(a, b, c)) > 0:
-        x1 = (-b + ((discr(a, b, c)) ** (0.5))) / (2 * a)
-        x2 = (-b - ((discr(a, b, c)) ** (0.5))) / (2 * a)
+    elif discr > 0:
+        x1 = (-b + (discr) ** (0.5)) / (2 * a)
+        x2 = (-b - (discr) ** (0.5)) / (2 * a)
         x = np.linspace(x1, x2)
         return x
 
-x = kvur_withdiscr(discr)
 
-def kvur_graf(x):
+x = kvur_withdiscr(discr_res)
+
+def kvur_graf(x:np.ndarray, discr:int, a:int, b:int, c:int)->None:
     """
     Функция принимает на вход х
+    и результат функции discr
     являющиеся результатом функции
     kvur_withdiscr(discr) и рисует
     график квадратичного уравнения
     """
-    if (discr(a, b, c)) < 0:
+    if discr < 0:
         return
     else:
-        # x = kvur_withdiscr(discr)
         y = a * (x ** 2) + b * x + c
 
-        plt.plot(x, y)
+        plt.plot(x, y, label=f"Корни уравнения х1 = {round(x[0], 2)}, х2 = {round(x[-1], 2)}")
+        plt.ylabel("ось Y")
+        plt.xlabel("ось Х")
+        plt.legend()
+        plt.title(f"График квадратного уравнения: {a}*x^2+{b}*x+{c}")
+        plt.savefig("1.png")
         plt.show()
 
+
 # print (kvur_withdiscr(discr))
-# print (kvur_graf(x))
+print (kvur_graf(x, discr_res, a, b, c))
 
 #HW10
 
@@ -197,60 +205,55 @@ for i in range(0, len(list_to_sort)):
 
 #HW SBER
 
-black_list = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
+black_list = [5]
 # 4, 2, 0, 3, 2, 5, 0, 1
 # 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1
 
-# def waterline(black_list:list)->int:
-# """
-# Функция принимает на вход список
-# и возвращает число заполненых пустот между
-# максимумов принимаемого списка
-# """
-highground = []
-water_list = 0
+def waterline(black_list:list, water_list=None)-> int:
+    """
+    Функция принимает на вход список
+    и возвращает число заполненых пустот между
+    максимумов принимаемого списка
+    """
+    highground = []
+    water_list = 0
 
+    for i in range(len(black_list)):
+        if black_list[i] != 0:
+            highground.append(black_list[0])
+            break
+        else:
+            highground.append(black_list[1])
+            black_list.pop(black_list[i])
+            break
 
-for i in range(len(black_list)):
-    if black_list[i] != 0:
-        highground.append(black_list[0])
-        break
-    else:
-        highground.append(black_list[1])
-        black_list.pop(black_list[i])
-        break
+    t = 0
+    for i in range(1, len(black_list)-1):
+        if black_list[i] < highground[t]:
+            continue
+        elif black_list[i] >= highground[t]:
+            highground.append(black_list[i])
+            t += 1
 
-t = 0
-for i in range(1, len(black_list)-1):
-    if black_list[i] < highground[t]:
-        continue
-    elif black_list[i] >= highground[t]:
-        highground.append(black_list[i])
-        t += 1
+    for i in range(1, len(black_list)):
+        if black_list[-i] < black_list[-i - 1]:
+            highground.append(black_list[-i - 1])
+        else:
+            highground.append(black_list[-i])
 
-for i in range(1, len(black_list)):
-    if black_list[-i] < black_list[-i - 1]:
-        highground.append(black_list[-i - 1])
-    else:
-        highground.append(black_list[-i])
+    c = 0
 
+    for i in range(1, len(black_list)-1):
+        if highground[c+1 - len(highground)] == black_list[i]:
+            c += 1
+        elif highground[c - len(highground)] > highground[c+1 - len(highground)]:
+            c += 1
+            water_list += highground[c - len(highground)] - black_list[i - len(black_list)]
+        else:
+            water_list += highground[c - len(highground)] - black_list[i]
+    return water_list
 
-
-
-c = 0
-
-for i in range(1, len(black_list)-1):
-    if highground[c+1 - len(highground)] == black_list[i]:
-        c += 1
-    elif highground[c - len(highground)] > highground[c+1 - len(highground)]:
-        c += 1
-        water_list += highground[c - len(highground)] - black_list[i - len(black_list)]
-    else:
-        water_list += highground[c - len(highground)] - black_list[i]
-
-
-
-print (water_list)
+print(waterline(black_list))
 
 #HW 11
 
@@ -359,4 +362,5 @@ def quick_sort(array:list)->list or None:
 #~0.2 sec
 # print(timeit.timeit(time_test5))
 
+#HW 13
 
