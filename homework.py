@@ -141,7 +141,7 @@ def repetition_finder(test_string:str)->list:
 
 #HW9
 
-a, b, c = 1, -4, -48
+a, b, c = 1, 2, 3
 
 discriminant = lambda a, b, c : (b**2)-4*a*c
 discr_res = discriminant(a, b, c)
@@ -184,12 +184,12 @@ def kvur_graf(x:np.ndarray, discr:int, a:int, b:int, c:int)->None:
         plt.xlabel("ось Х")
         plt.legend()
         plt.title(f"График квадратного уравнения: {a}*x^2+{b}*x+{c}")
-        plt.savefig("1.png")
+        # plt.savefig("1.png")
         plt.show()
 
 
 # print (kvur_withdiscr(discr))
-print (kvur_graf(x, discr_res, a, b, c))
+# print (kvur_graf(x, discr_res, a, b, c))
 
 #HW10
 
@@ -253,7 +253,7 @@ def waterline(black_list:list, water_list=None)-> int:
             water_list += highground[c - len(highground)] - black_list[i]
     return water_list
 
-print(waterline(black_list))
+# print(waterline(black_list))
 
 #HW 11
 
@@ -363,4 +363,36 @@ def quick_sort(array:list)->list or None:
 # print(timeit.timeit(time_test5))
 
 #HW 13
+
+in_count = [i for i in range(int(input())+1)]
+
+for i in in_count:
+    for j in range(1, len(in_count)):
+        in_count[j], in_count[j+1 - len(in_count)] = in_count[j+1 - len(in_count)], in_count[j]
+        print(in_count)
+
+#HW 14
+
+ with open('files/quadratic_equation.json', 'a') as qe:
+    # print(any_dict, file=uID)
+
+    qe.write(discr_res)
+    qe.write(kvur_withdiscr(discr_res))
+    dict_from_uID = {'user1':'','user2':'','user3':'','user4':'','user5':''}
+    def dict_uID_with_randint_key(dict_from_uID:dict):
+        """
+        Функция принимает словарь и с помощью
+        цикла for добавляет случайное числовое значение
+        к каждому ключу, а после запиывает этот словарь
+        в файл userID.json
+        """
+        for key in dict_from_uID:
+            dict_from_uID[key] = randint(0, 999999)
+        return dict_from_uID
+    print(dict_uID_with_randint_key(dict_from_uID), file=uID)
+    print(re.search('\w', 'files/usersID.json'))
+    print(uID.read())
+
+
+
 
