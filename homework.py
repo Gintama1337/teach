@@ -364,35 +364,87 @@ def quick_sort(array:list)->list or None:
 
 #HW 13
 
-in_count = [i for i in range(int(input())+1)]
-
-for i in in_count:
-    for j in range(1, len(in_count)):
-        in_count[j], in_count[j+1 - len(in_count)] = in_count[j+1 - len(in_count)], in_count[j]
-        print(in_count)
+# in_count = [i for i in range(int(input())+1)]
+#
+# for i in in_count:
+#     for j in range(1, len(in_count)):
+#         in_count[j], in_count[j+1 - len(in_count)] = in_count[j+1 - len(in_count)], in_count[j]
+#         print(in_count)
 
 #HW 14
 
- with open('files/quadratic_equation.json', 'a') as qe:
-    # print(any_dict, file=uID)
 
-    qe.write(discr_res)
-    qe.write(kvur_withdiscr(discr_res))
-    dict_from_uID = {'user1':'','user2':'','user3':'','user4':'','user5':''}
-    def dict_uID_with_randint_key(dict_from_uID:dict):
-        """
-        Функция принимает словарь и с помощью
-        цикла for добавляет случайное числовое значение
-        к каждому ключу, а после запиывает этот словарь
-        в файл userID.json
-        """
-        for key in dict_from_uID:
-            dict_from_uID[key] = randint(0, 999999)
-        return dict_from_uID
-    print(dict_uID_with_randint_key(dict_from_uID), file=uID)
-    print(re.search('\w', 'files/usersID.json'))
-    print(uID.read())
+#HW 15
 
 
+#HW 16
 
+list1_to_zip = [1, 2, 4, 5]
+list2_to_zip = [1, '?', 4, 5]
+
+def compare_zip(list1_to_zip:list, list2_to_zip:list)->True or False:
+    """
+    Функция принимает на вход 2 списка и методом zip
+    сравнивает их между собой, если один из елементов "?"
+    он может считаться любым значением, если списки одинаковы
+    на выходе True, если нет False
+    """
+    for i, j in zip(list1_to_zip, list2_to_zip):
+        if i == j:
+            continue
+        elif (i == '?') or (j == '?'):
+            continue
+        else:
+            return False
+    return True
+
+# print(compare_zip(list1_to_zip,list2_to_zip))
+
+#HW 17
+
+list_to_filter = [2, 0, 5, 4, 2, 10]
+numb = int(input())
+
+# print(list(filter(lambda x: x > numb, list_to_filter)))
+
+#HW 18
+
+list_to_map = [2, 0, 4, 5, 1, 6, 9]
+
+multi = lambda x: x * numb
+
+# print(list(map(multi, list_to_map)))
+
+#HW 19
+
+zaebalo = []
+multiplication = lambda x: numb * x
+addition = lambda x: numb + x
+exponent = lambda x: numb ** x
+
+def extra_map(list_to_map:list)->list:
+    """
+    Функция принимает на вход список, далее принтует
+    вложенные функции и добавляет в список ZAEBALO
+    каждый элемент списка list_to_map деленный на numb
+    """
+    for i in list_to_map:
+        if i == 0:
+            continue
+        else:
+            zaebalo.append(i / numb)
+    print(list(map(addition, list_to_map)))
+    print(list(map(exponent, list_to_map)))
+    print(list(map(multiplication, list_to_map)))
+    return zaebalo
+
+plt.plot(multiplication)
+plt.plot(addition)
+plt.plot(exponent)
+plt.plot(zaebalo)
+plt.legend(f"Красный = Умножение, Синий = Деление, Желтый = Сложение, Зеленый = Возведение в степень")
+plt.show()
+
+
+print(extra_map(list_to_map))
 
