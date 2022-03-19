@@ -403,7 +403,7 @@ def compare_zip(list1_to_zip:list, list2_to_zip:list)->True or False:
 #HW 17
 
 list_to_filter = [2, 0, 5, 4, 2, 10]
-numb = int(input())
+# numb = int(input())
 
 # print(list(filter(lambda x: x > numb, list_to_filter)))
 
@@ -411,16 +411,16 @@ numb = int(input())
 
 list_to_map = [2, 0, 4, 5, 1, 6, 9]
 
-multi = lambda x: x * numb
+# multi = lambda x: x / numb
 
 # print(list(map(multi, list_to_map)))
 
 #HW 19
 
 zaebalo = []
-multiplication = lambda x: numb * x
-addition = lambda x: numb + x
-exponent = lambda x: numb ** x
+# multiplication = lambda x: numb * x
+# addition = lambda x: numb + x
+# exponent = lambda x: numb ** x
 
 def extra_map(list_to_map:list)->list:
     """
@@ -438,13 +438,40 @@ def extra_map(list_to_map:list)->list:
     print(list(map(multiplication, list_to_map)))
     return zaebalo
 
-plt.plot(multiplication)
-plt.plot(addition)
-plt.plot(exponent)
-plt.plot(zaebalo)
-plt.legend(f"Красный = Умножение, Синий = Деление, Желтый = Сложение, Зеленый = Возведение в степень")
-plt.show()
+# plt.plot(multiplication)
+# plt.plot(addition)
+# plt.plot(exponent)
+# plt.plot(zaebalo)
+# plt.legend(f"Красный = Умножение, Синий = Деление, Желтый = Сложение, Зеленый = Возведение в степень")
+# plt.show()
 
 
-print(extra_map(list_to_map))
+# print(extra_map(list_to_map))
 
+#HW 20
+
+# text = str(input())
+# type_to_text = str(input())
+
+def lowup(text:str, type_to_text:str)->list:
+    if type_to_text == 'lower':
+        print(list(filter(text, text.lower())))
+    elif type_to_text == 'upper':
+        print(list(filter(text, text.upper())))
+    return
+# print(lowup(text, type_to_text))
+
+#HW 21
+
+list_to_minus = [4, 6, 2, 2, 4]
+znach = 3
+
+def func_minus_list(list_to_minus:list, znach:int)->list:
+    ipf = 0
+    eoa_list = []
+    while (list_to_minus[ipf] - znach) >= 0:
+        eoa_list.append(list_to_minus[ipf] - znach)
+        ipf += 1
+    return eoa_list
+
+print(func_minus_list(list_to_minus,znach))
