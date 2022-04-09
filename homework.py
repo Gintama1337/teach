@@ -380,7 +380,7 @@ def quick_sort(array:list)->list or None:
 #HW 16
 
 list1_to_zip = [1, 2, 4, 5]
-list2_to_zip = [1, '?', 4, 5]
+list2_to_zip = [1, '2', 4, 5]
 
 def compare_zip(list1_to_zip:list, list2_to_zip:list)->True or False:
     """
@@ -403,63 +403,93 @@ def compare_zip(list1_to_zip:list, list2_to_zip:list)->True or False:
 #HW 17
 
 list_to_filter = [2, 0, 5, 4, 2, 10]
-# numb = int(input())
 
-# print(list(filter(lambda x: x > numb, list_to_filter)))
+
+# print(numb.split(' '))
+def filter_lef(list_to_filter:list)->list or None:
+    numb = input()
+    sgf = numb.split(' ')
+    if sgf[0] == 'Меньше':
+        return list(filter(lambda x: x < int(sgf[1]), list_to_filter))
+    elif sgf[0] == 'Больше':
+        return list(filter(lambda x: x > int(sgf[1]), list_to_filter))
+    else:
+        print('Вы ввели не правильно')
+
+# print(filter_lef(list_to_filter))
 
 #HW 18
 
 list_to_map = [2, 0, 4, 5, 1, 6, 9]
-
-# multi = lambda x: x / numb
-
-# print(list(map(multi, list_to_map)))
+def map_work(list_to_map:list)->list or None:
+    multi = input()
+    fgp = multi.split(' ')
+    if fgp[0] == '*':
+        return list(map(lambda x: x * int(fgp[1]), list_to_map))
+    elif fgp[0] == '**':
+        return list(map(lambda x: x ** int(fgp[1]), list_to_map))
+    elif fgp[0] == '/':
+        return list(map(lambda x: x / int(fgp[1]), list_to_map))
+    elif fgp[0] == '+':
+        return list(map(lambda x: x + int(fgp[1]), list_to_map))
+    else:
+        print('Вы ввели не правильно')
+# print(map_work(list_to_map, multi))
 
 #HW 19
-
-zaebalo = []
-# multiplication = lambda x: numb * x
-# addition = lambda x: numb + x
-# exponent = lambda x: numb ** x
 
 def extra_map(list_to_map:list)->list:
     """
     Функция принимает на вход список, далее принтует
-    вложенные функции и добавляет в список ZAEBALO
+    вложенные функции и добавляет в список raduga
     каждый элемент списка list_to_map деленный на numb
     """
-    for i in list_to_map:
-        if i == 0:
-            continue
-        else:
-            zaebalo.append(i / numb)
-    print(list(map(addition, list_to_map)))
-    print(list(map(exponent, list_to_map)))
-    print(list(map(multiplication, list_to_map)))
-    return zaebalo
+    multi = input()
+    fgp = multi.split(' ')
+    multi = list(map(lambda x: x * int(fgp[1]), list_to_map))
+    stepen = list(map(lambda x: x ** int(fgp[1]), list_to_map))
+    delenie = list(map(lambda x: x / int(fgp[1]), list_to_map))
+    slozenie = list(map(lambda x: x + int(fgp[1]), list_to_map))
+    plt.plot(multi, label="Умножение", color='r', linestyle='-')
+    plt.plot(delenie, label="Деление", color='b', linestyle='--')
+    plt.plot(slozenie, label="Сложение", color='black', linestyle=':')
+    plt.plot(stepen, label="Степень", color='g', linestyle='-.')
+    plt.plot(list_to_map, label="Изначальный", color='brown')
+    plt.title('Графики списка')
+    plt.legend()
+    plt.show()
+    if fgp[0] == '*':
+        return multi
+    elif fgp[0] == '**':
+        return stepen
+    elif fgp[0] == '/':
+        return delenie
+    elif fgp[0] == '+':
+        return slozenie
+    else:
+        print('Вы ввели не правильно')
 
-# plt.plot(multiplication)
-# plt.plot(addition)
-# plt.plot(exponent)
-# plt.plot(zaebalo)
-# plt.legend(f"Красный = Умножение, Синий = Деление, Желтый = Сложение, Зеленый = Возведение в степень")
-# plt.show()
 
 
 # print(extra_map(list_to_map))
 
 #HW 20
 
-# text = str(input())
-# type_to_text = str(input())
+text = input()
+type_to_text = str(input())
 
 def lowup(text:str, type_to_text:str)->list:
     if type_to_text == 'lower':
-        print(list(filter(text, text.lower())))
+        # print(text[0], 'Ento bukva')
+        # print(text[0].lower(), 'a ento malenkaya bukva')
+        # print(text.lower(), 'a ento vsya stroka')
+        lower_text = list(filter(lambda x: x == x.lower(), text))
+        return ''.join(lower_text)
     elif type_to_text == 'upper':
-        print(list(filter(text, text.upper())))
-    return
-# print(lowup(text, type_to_text))
+        upper_text = list(filter(lambda x: x == x.upper(), text))
+        return ''.join(upper_text)
+
+print(lowup(text, type_to_text))
 
 #HW 21
 
