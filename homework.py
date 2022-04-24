@@ -5,7 +5,10 @@ from random import randint
 from matplotlib import pyplot as plt
 import math
 from datetime import datetime
-import timeit
+import time
+import json
+import requests
+import hashlib
 
 #HW1
 
@@ -92,22 +95,22 @@ def sin_cos_showoff(hw_dict:dict):
 #     any_dict_sort.sort()
 #     for i in any_dict_sort:
 #         print(i, ':', any_dict[i])
-    # uID.write(uID for key in randint(0,999999))
-    # print((uID for key in random.choices(population='agdgeghsdh')), file=uID)
-    # dict_from_uID = {'user1':'','user2':'','user3':'','user4':'','user5':''}
-    # def dict_uID_with_randint_key(dict_from_uID:dict):
-    #     """
-    #     Функция принимает словарь и с помощью
-    #     цикла for добавляет случайное числовое значение
-    #     к каждому ключу, а после запиывает этот словарь
-    #     в файл userID.json
-    #     """
-    #     for key in dict_from_uID:
-    #         dict_from_uID[key] = randint(0, 999999)
-    #     return dict_from_uID
-    # print(dict_uID_with_randint_key(dict_from_uID), file=uID)
-    # print(re.search('\w', 'files/usersID.json'))
-    # print(uID.read())
+#     uID.write(uID for key in randint(0,999999))
+#     print((uID for key in random.choices(population='agdgeghsdh')), file=uID)
+#     dict_from_uID = {'user1':'','user2':'','user3':'','user4':'','user5':''}
+#     def dict_uID_with_randint_key(dict_from_uID:dict):
+#         """
+#         Функция принимает словарь и с помощью
+#         цикла for добавляет случайное числовое значение
+#         к каждому ключу, а после запиывает этот словарь
+#         в файл userID.json
+#         """
+#         for key in dict_from_uID:
+#             dict_from_uID[key] = randint(0, 999999)
+#         return dict_from_uID
+#     print(dict_uID_with_randint_key(dict_from_uID), file=uID)
+#     print(re.search('\w', 'files/usersID.json'))
+#     print(uID.read())
 
 
 
@@ -444,7 +447,7 @@ def extra_map(list_to_map:list)->list:
     вложенные функции и добавляет в список raduga
     каждый элемент списка list_to_map деленный на numb
     """
-    multi = input()
+    multi = input("Введите значения(прим:* 2):")
     fgp = multi.split(' ')
     multi = list(map(lambda x: x * int(fgp[1]), list_to_map))
     stepen = list(map(lambda x: x ** int(fgp[1]), list_to_map))
@@ -475,8 +478,8 @@ def extra_map(list_to_map:list)->list:
 
 #HW 20
 
-text = input()
-type_to_text = str(input())
+# text = input()
+# type_to_text = str(input())
 
 def lowup(text:str, type_to_text:str)->list:
     if type_to_text == 'lower':
@@ -489,7 +492,7 @@ def lowup(text:str, type_to_text:str)->list:
         upper_text = list(filter(lambda x: x == x.upper(), text))
         return ''.join(upper_text)
 
-print(lowup(text, type_to_text))
+# print(lowup(text, type_to_text))
 
 #HW 21
 
@@ -504,4 +507,131 @@ def func_minus_list(list_to_minus:list, znach:int)->list:
         ipf += 1
     return eoa_list
 
-print(func_minus_list(list_to_minus,znach))
+# print(func_minus_list(list_to_minus,znach))
+
+#HW 22
+
+words_in_time = "Я ЛЮБЛЮ ПРОГАТЬ БОЛЬШЕ ЧЕМ ИГРАТЬ, И ОБЕЩАЮ ПРОГАТЬ ЛУЧШЕ И БОЛЬШЕ!"
+def time_check(words_in_time:str)->str or None:
+    """
+    Функция с течением указанного времени в секундах, будет печатать строку
+    каждую секунду и печатать время до её окончания.
+    """
+    sec = int(input())
+    while sec > 0:
+        print(words_in_time, "Осталось", sec, "секунды.")
+        sec -= 1
+        time.sleep(1)
+# print(time_check(words_in_time))
+
+#HW 23
+
+def square()->None:
+    """
+    Функция принтует прямоугольник указанных размеров.
+    """
+    num = input()
+    two_nums = num.split(',')
+    if len(num) < 2:
+        print(' ', '-' * int(num))
+        for i in range(int(num)):
+            print('|', ' ' * int(num), '|')
+        print(' ', '-' * int(num))
+    else:
+        print(' ', '-' * int(two_nums[1]))
+        for i in range(int(two_nums[0])):
+            print('|', ' ' * int(two_nums[1]), '|')
+        print(' ', '-' * int(two_nums[1]))
+
+# print(square())
+
+#HW 24
+
+list_to_sum = [0, -1, 7, 2, 5]
+# sign = input()
+list_to_sum2 = []
+def sum_numb(list_to_sum:list, sign:str, list_to_sum2:list)->int or float:
+    """
+    Функция в зависимости от введенного знака
+    будет считать положительные или отрицательные значения списка
+    """
+    if sign == '+':
+        if len(list_to_sum) == 0:
+            return sum(list_to_sum2)
+        elif list_to_sum[0] < 0:
+            list_to_sum.pop(0)
+            return sum_numb(list_to_sum, sign, list_to_sum2)
+        else:
+            list_to_sum2.append(list_to_sum[0])
+            list_to_sum.pop(0)
+            return sum_numb(list_to_sum, sign, list_to_sum2)
+    if sign == '-':
+        if len(list_to_sum) == 0:
+            return sum(list_to_sum2)
+        elif list_to_sum[0] > 0:
+            list_to_sum.pop(0)
+            return sum_numb(list_to_sum, sign, list_to_sum2)
+        else:
+            list_to_sum2.append(list_to_sum[0])
+            list_to_sum.pop(0)
+            return sum_numb(list_to_sum, sign, list_to_sum2)
+
+# print(sum_numb(list_to_sum, sign, list_to_sum2))
+
+
+# # def sum_num2(list_to_sum, sign):
+# if sign == '+':
+#     beg = list(map(lambda x: x if x > 0 else 0, list_to_sum))
+# else:
+#     cef = list(map(lambda x: x if x < 0 else 0, list_to_sum))
+# print(sum(beg))
+# get = [i for i in range(10)]
+# def my_generator(x:int):
+#     for i in range(x):
+#         yield i
+#
+# get = (i for i in range(10))
+# print(list(get))
+
+#HW 25
+
+def validation_json()->list:
+    with open("files/usersID.json") as uID:
+        data = json.load(uID)
+        print(data)
+        while True:
+            login = input("Введите логин: ")
+            if login in data.keys():
+                password = int(input("Введите пароль: "))
+                if (login, password) in data.items():
+                    return extra_map(list_to_map)
+                    break
+                else:
+                    print("Ввели не правильный логин или пароль")
+                    continue
+            else:
+                print("Ввели не правильный логин")
+                continue
+
+# print(validation_json())
+#Создать форму регистрации, функцию которая будет логин пароль админа, а после верификации создавать логин парлль обычных юзеров и всё это сохранить в json
+
+#HW 26
+
+#сайт цбр, реализовать к этому ресурсу доступ по api, получить с него курс валют и выводить в рублях
+data2 = {"put something":"somethings"}
+local_serv = requests.put("https://reqres.in/api/users?page=2", json=data2)
+
+print(local_serv.text)
+
+#
+#Добавить json с хешами для сохранности
+with open("files/usersID.json") as uID:
+    data = json.load(uID)
+    # print(data)
+# print(hashlib.md5(str(data).encode("utf-8")).hexdigest())
+
+#
+# отобразить сколько в общем семья платит за каждый продукт
+randlist = (1, 2, 4)
+# print(hash(randlist))
