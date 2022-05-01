@@ -595,23 +595,23 @@ def sum_numb(list_to_sum:list, sign:str, list_to_sum2:list)->int or float:
 
 #HW 25
 
-def validation_json()->list:
-    with open("files/usersID.json") as uID:
-        data = json.load(uID)
-        print(data)
-        while True:
-            login = input("Введите логин: ")
-            if login in data.keys():
-                password = int(input("Введите пароль: "))
-                if (login, password) in data.items():
-                    return extra_map(list_to_map)
-                    break
-                else:
-                    print("Ввели не правильный логин или пароль")
-                    continue
-            else:
-                print("Ввели не правильный логин")
-                continue
+# def validation_json()->list:
+#     with open("files/usersID.json") as uID:
+#         data = json.load(uID)
+#         print(data)
+#         while True:
+#             login = input("Введите логин: ")
+#             if login in data.keys():
+#                 password = int(input("Введите пароль: "))
+#                 if (login, password) in data.items():
+#                     return extra_map(list_to_map)
+#                     break
+#                 else:
+#                     print("Ввели не правильный логин или пароль")
+#                     continue
+#             else:
+#                 print("Ввели не правильный логин")
+#                 continue
 
 # print(validation_json())
 #Создать форму регистрации, функцию которая будет логин пароль админа, а после верификации создавать логин парлль обычных юзеров и всё это сохранить в json
@@ -619,15 +619,15 @@ def validation_json()->list:
 #HW 26
 
 #сайт цбр, реализовать к этому ресурсу доступ по api, получить с него курс валют и выводить в рублях
-data2 = {"put something":"somethings"}
-local_serv = requests.put("https://reqres.in/api/users?page=2", json=data2)
-
-print(local_serv.text)
+# data2 = {"put something":"somethings"}
+# local_serv = requests.put("https://reqres.in/api/users?page=2", json=data2)
+#
+# print(local_serv.text)
 
 #
 #Добавить json с хешами для сохранности
-with open("files/usersID.json") as uID:
-    data = json.load(uID)
+# with open("files/usersID.json") as uID:
+#     data = json.load(uID)
     # print(data)
 # print(hashlib.md5(str(data).encode("utf-8")).hexdigest())
 
@@ -635,3 +635,61 @@ with open("files/usersID.json") as uID:
 # отобразить сколько в общем семья платит за каждый продукт
 randlist = (1, 2, 4)
 # print(hash(randlist))
+
+#HW 27
+
+def score_stroke()->str:
+    """
+    Функция считает колличество повторяющихся букв в переменной
+    my_str и выводит строку с буквой и колличеством её повторений.
+    """
+    my_str = input()
+    score = 1
+    answ = ""
+    for i in range(len(my_str)-1):
+        if my_str[i] == my_str[i+1]:
+            score += 1
+        else:
+            answ = answ + my_str[i] + str(score)
+            score = 1
+    answ = answ + my_str[-1] + str(score)
+    return answ
+
+#HW28
+
+val = 121
+
+def bank_exchange(val:int)->str or int:
+    bank = [10, 5, 1]
+    exch_to_ten = val // bank[0]
+    exch_to_five = (val % bank[0]) // bank[1]
+    exch_to_one = (val % bank[1]) // bank[2]
+    return print(exch_to_ten, exch_to_five, exch_to_one)
+
+# bank_exchange(val)
+
+#HW 29
+
+# def validation_json()->list:
+with open("files/test2.json.json") as uID:
+    data = json.load(uID)
+
+    if input() == data(key) and input() == data(value):
+        print("data")
+# print(validation_json())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
