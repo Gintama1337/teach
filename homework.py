@@ -631,25 +631,25 @@ def sum_numb(list_to_sum: list, sign: str, list_to_sum2: list) -> int or float:
 
 # HW 25
 
-#  def validation_json()->list:
-#      with open("files/usersID.json") as uID:
-#          data = json.load(uID)
-#          print(data)
-#          while True:
-#              login = input("Введите логин: ")
-#              if login in data.keys():
-#                  password = int(input("Введите пароль: "))
-#                  if (login, password) in data.items():
-#                      return extra_map(list_to_map)
-#                      break
-#                  else:
-#                      print("Ввели не правильный логин или пароль")
-#                      continue
-#              else:
-#                  print("Ввели не правильный логин")
-#                  continue
+def validation_json()->list:
+    with open("files/usersID.json") as uID:
+        data = json.load(uID)
+        print(data)
+        while True:
+            login = input("Введите логин: ")
+            if login in data.keys():
+                password = input("Введите пароль: ")
+                if (login, password) in data.items():
+                    return extra_map(list_to_map)
+                    break
+                else:
+                    print("Ввели не правильный логин или пароль")
+                    continue
+            else:
+                print("Ввели не правильный логин")
+                continue
 
-#  print(validation_json())
+print(validation_json())
 # Создать форму регистрации, функцию которая будет логин пароль админа, а после верификации создавать логин парлль обычных юзеров и всё это сохранить в json
 
 # HW 26
@@ -723,7 +723,7 @@ def validation_json() -> dict:
     и после правлиьного ввода позволяет добавить
     новых пользователей.
     """
-    users_id = {}
+
     with open("files/test2.json") as tst:
         data = json.load(tst)
         print(data)
@@ -731,26 +731,44 @@ def validation_json() -> dict:
         if login in data.keys():
             password = input()
             if password == data[login]:
-                for i in range(3):
-                    i = input()
-                    users_id[i] = input()
-    with open("files/usersID.json", "w") as uID:
-        json.dump(users_id, uID)
-    hashus = {"users": hashlib.md5(str(users_id).encode("utf-8")).hexdigest()}
+                users = json.load(open("files/usersID.json"))
+                with open("files/usersID.json", "w") as uID:
+                    for i in range(1):
+                        i = input()
+                        users[i] = input()
+                    json.dump(users, uID)
+    hashus = {"users": hashlib.md5(str(users).encode("utf-8")).hexdigest()}
     with open("files/hash.json", "w") as hsh:
         json.dump(hashus, hsh)
-    return users_id
+    return users
 
-# print(validation_json())
+print(validation_json())
 
 # HW 30
 
-with open("files/crb.json", "w") as crb:
-    local_serv = requests.get("https://www.cbr.ru")
-    json.dump(local_serv.text, crb, indent=4)
-with open("files/crb.json", "r") as crb:
-    valute = json.load(crb)
-    nums = list(filter(lambda x: 6 < len(x), (re.findall(r'\d+.,\d+', valute))))
+def crb_valute()->None:
+    """
+    Функция выводит курс валют доллара и евро
+    с сайта ЦРБ за вчера и сегодня.
+    """
+    with open("files/crb.json", "w") as crb:
+        local_serv = requests.get("https://www.cbr.ru")
+        json.dump(local_serv.text, crb, indent=4)
+    with open("files/crb.json", "r") as crb:
+        valute = json.load(crb)
+        nums = list(filter(lambda x: 6 < len(x) and len(x) < 8, (re.findall(r'\d+.,\d+', valute))))
+    rate_dollar_yesterday = print("Вчера один доллар был равен", nums[0], "руб.")
+    rate_dollar_today = print("Сегодня один доллар равен", nums[1], "руб.")
+    rate_evro_yesterday = print("Вчера один евро был равен", nums[2], "руб.")
+    rate_evro_today = print("Сегодня один евро равен", nums[3], "руб.")
+    return None
+# реализовать гибкую структуру для получения всех валют в зависимости от
 
-print(("Один доллар равен", nums[0], "Вчера"), ("Один доллар равен", nums[1], "Сегодня"), ("Один евро равен", nums[2], "Вчера"), ("Один евро равен", nums[3], "Сегодня"), sep="\n")
+
+# print(crb_valute())
+
+
+# local_serv = requests.get("https://www.cbr.ru")
+# print(local_serv.json())
+
 
