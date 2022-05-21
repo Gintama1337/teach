@@ -9,6 +9,8 @@ import time
 import json
 import requests
 import hashlib
+import sqlalchemy as sqal
+import pandas
 
 
 #  HW1
@@ -445,7 +447,7 @@ def filter_lef(list_to_filter: list) -> list or None:
 
 # HW 18
 
-list_to_map = [2, 0, 4, 5, 1, 6, 9]
+# list_to_map = [2, 0, 4, 5, 1, 6, 9]
 
 
 def map_work(list_to_map: list) -> list or None:
@@ -467,36 +469,36 @@ def map_work(list_to_map: list) -> list or None:
 
 # HW 19
 
-def extra_map(list_to_map: list) -> list:
-    """
-    Функция принимает на вход список, далее принтует
-    вложенные функции и добавляет в список raduga
-    каждый элемент списка list_to_map деленный на numb
-    """
-    multi = input("Введите значения(прим:* 2):")
-    fgp = multi.split(' ')
-    multi = list(map(lambda x: x * int(fgp[1]), list_to_map))
-    stepen = list(map(lambda x: x ** int(fgp[1]), list_to_map))
-    delenie = list(map(lambda x: x / int(fgp[1]), list_to_map))
-    slozenie = list(map(lambda x: x + int(fgp[1]), list_to_map))
-    plt.plot(multi, label="Умножение", color='r', linestyle='-')
-    plt.plot(delenie, label="Деление", color='b', linestyle='--')
-    plt.plot(slozenie, label="Сложение", color='black', linestyle=':')
-    plt.plot(stepen, label="Степень", color='g', linestyle='-.')
-    plt.plot(list_to_map, label="Изначальный", color='brown')
-    plt.title('Графики списка')
-    plt.legend()
-    plt.show()
-    if fgp[0] == '*':
-        return multi
-    elif fgp[0] == '**':
-        return stepen
-    elif fgp[0] == '/':
-        return delenie
-    elif fgp[0] == '+':
-        return slozenie
-    else:
-        print('Вы ввели не правильно')
+# def extra_map(list_to_map: list) -> list:
+#     """
+#     Функция принимает на вход список, далее принтует
+#     вложенные функции и добавляет в список raduga
+#     каждый элемент списка list_to_map деленный на numb
+#     """
+#     multi = input("Введите значения(прим:* 2):")
+#     fgp = multi.split(' ')
+#     multi = list(map(lambda x: x * int(fgp[1]), list_to_map))
+#     stepen = list(map(lambda x: x ** int(fgp[1]), list_to_map))
+#     delenie = list(map(lambda x: x / int(fgp[1]), list_to_map))
+#     slozenie = list(map(lambda x: x + int(fgp[1]), list_to_map))
+#     plt.plot(multi, label="Умножение", color='r', linestyle='-')
+#     plt.plot(delenie, label="Деление", color='b', linestyle='--')
+#     plt.plot(slozenie, label="Сложение", color='black', linestyle=':')
+#     plt.plot(stepen, label="Степень", color='g', linestyle='-.')
+#     plt.plot(list_to_map, label="Изначальный", color='brown')
+#     plt.title('Графики списка')
+#     plt.legend()
+#     plt.show()
+#     if fgp[0] == '*':
+#         return multi
+#     elif fgp[0] == '**':
+#         return stepen
+#     elif fgp[0] == '/':
+#         return delenie
+#     elif fgp[0] == '+':
+#         return slozenie
+#     else:
+#         print('Вы ввели не правильно')
 
 
 #  print(extra_map(list_to_map))
@@ -631,25 +633,26 @@ def sum_numb(list_to_sum: list, sign: str, list_to_sum2: list) -> int or float:
 
 # HW 25
 
-def validation_json()->list:
-    with open("files/usersID.json") as uID:
-        data = json.load(uID)
-        print(data)
-        while True:
-            login = input("Введите логин: ")
-            if login in data.keys():
-                password = input("Введите пароль: ")
-                if (login, password) in data.items():
-                    return extra_map(list_to_map)
-                    break
-                else:
-                    print("Ввели не правильный логин или пароль")
-                    continue
-            else:
-                print("Ввели не правильный логин")
-                continue
+# def validation_json() -> list:
+#     with open("files/usersID.json") as uID:
+#         data = json.load(uID)
+#         print(data)
+#         while True:
+#             login = input("Введите логин: ")
+#             if login in data.keys():
+#                 password = input("Введите пароль: ")
+#                 if (login, password) in data.items():
+#                     return extra_map(list_to_map)
+#                     break
+#                 else:
+#                     print("Ввели не правильный логин или пароль")
+#                     continue
+#             else:
+#                 print("Ввели не правильный логин")
+#                 continue
 
-print(validation_json())
+
+# print(validation_json())
 # Создать форму регистрации, функцию которая будет логин пароль админа, а после верификации создавать логин парлль обычных юзеров и всё это сохранить в json
 
 # HW 26
@@ -661,7 +664,7 @@ print(validation_json())
 #  print(local_serv.text)
 
 #
-#  # Добавить json с хешами для сохранности
+#  Добавить json с хешами для сохранности
 #  with open("files/usersID.json") as uID:
 #      data = json.load(uID)
 #      print(data)
@@ -717,58 +720,179 @@ def bank_exchange(val: int) -> str or int:
 
 # HW 29
 
-def validation_json() -> dict:
-    """
-    Функция проводит валидацию логина пароля админа
-    и после правлиьного ввода позволяет добавить
-    новых пользователей.
-    """
+# def validation_json() -> dict:
+#     """
+#     Функция проводит валидацию логина пароля админа
+#     и после правлиьного ввода позволяет добавить
+#     новых пользователей и добавляет в их хеш файл hash.json.
+#     """
+#
+#     with open("files/test2.json") as tst:
+#         data = json.load(tst)
+#         print(data)
+#         login = input()
+#         if login in data.keys():
+#             password = input()
+#             if password == data[login]:
+#                 users = json.load(open("files/usersID.json"))
+#                 with open("files/usersID.json", "w") as uID:
+#                     for i in range(1):
+#                         i = input()
+#                         users[i] = input()
+#                     json.dump(users, uID)
+#     hashus = {"users": hashlib.md5(str(users).encode("utf-8")).hexdigest()}
+#     with open("files/hash.json", "w") as hsh:
+#         json.dump(hashus, hsh)
+#     return users
 
-    with open("files/test2.json") as tst:
-        data = json.load(tst)
-        print(data)
-        login = input()
-        if login in data.keys():
-            password = input()
-            if password == data[login]:
-                users = json.load(open("files/usersID.json"))
-                with open("files/usersID.json", "w") as uID:
-                    for i in range(1):
-                        i = input()
-                        users[i] = input()
-                    json.dump(users, uID)
-    hashus = {"users": hashlib.md5(str(users).encode("utf-8")).hexdigest()}
-    with open("files/hash.json", "w") as hsh:
-        json.dump(hashus, hsh)
-    return users
 
-print(validation_json())
+# print(validation_json())
 
 # HW 30
 
-def crb_valute()->None:
+def crb_valute() -> None:
     """
-    Функция выводит курс валют доллара и евро
+    Функция выводит курс валют
     с сайта ЦРБ за вчера и сегодня.
     """
-    with open("files/crb.json", "w") as crb:
-        local_serv = requests.get("https://www.cbr.ru")
-        json.dump(local_serv.text, crb, indent=4)
-    with open("files/crb.json", "r") as crb:
-        valute = json.load(crb)
-        nums = list(filter(lambda x: 6 < len(x) and len(x) < 8, (re.findall(r'\d+.,\d+', valute))))
-    rate_dollar_yesterday = print("Вчера один доллар был равен", nums[0], "руб.")
-    rate_dollar_today = print("Сегодня один доллар равен", nums[1], "руб.")
-    rate_evro_yesterday = print("Вчера один евро был равен", nums[2], "руб.")
-    rate_evro_today = print("Сегодня один евро равен", nums[3], "руб.")
-    return None
-# реализовать гибкую структуру для получения всех валют в зависимости от
+    valute_name = str(input())
+    valute_name = valute_name.upper()
+    local_serv = requests.get("https://www.cbr-xml-daily.ru/daily_json.js")
+    val_dict = dict(local_serv.json())
+    if valute_name in val_dict['Valute']:
+        print("Вчера один", (val_dict['Valute'][valute_name]['Name']), "был равен",
+              (val_dict['Valute'][valute_name]['Value']), "руб.")
+        print("Сегодня один", (val_dict['Valute'][valute_name]['Name']), "равен",
+              (val_dict['Valute'][valute_name]['Previous']), "руб.")
+    else:
+        print("Указанная валюта не найдена")
 
 
-# print(crb_valute())
+# crb_valute()
+
+# пощупать пандас влхимию сделать insert join delete
+# перенести HW 29 в бд последством алхимии
+# объеденить дз по валидации в один класс и сделать __защищенной функции коннекта к бд
+
+# HW 31
+
+class MyRaduga:
+
+    def __init__(self, value: list):
+        self.value = value
+
+    def extra_map(self, value: list) -> list:
+        """
+        Функция принимает на вход список, далее принтует
+        вложенные функции и добавляет в список raduga
+        каждый элемент списка list_to_map деленный на numb
+        """
+        multi = input("Введите значения(прим:* 2):")
+        fgp = multi.split(' ')
+        multi = list(map(lambda x: x * int(fgp[1]), value))
+        stepen = list(map(lambda x: x ** int(fgp[1]), value))
+        delenie = list(map(lambda x: x / int(fgp[1]), value))
+        slozenie = list(map(lambda x: x + int(fgp[1]), value))
+        plt.plot(multi, label="Умножение", color='r', linestyle='-')
+        plt.plot(delenie, label="Деление", color='b', linestyle='--')
+        plt.plot(slozenie, label="Сложение", color='black', linestyle=':')
+        plt.plot(stepen, label="Степень", color='g', linestyle='-.')
+        plt.plot(value, label="Изначальный", color='brown')
+        plt.title('Графики списка')
+        plt.legend()
+        plt.show()
+        if fgp[0] == '*':
+            return multi
+        elif fgp[0] == '**':
+            return stepen
+        elif fgp[0] == '/':
+            return delenie
+        elif fgp[0] == '+':
+            return slozenie
+        else:
+            print('Вы ввели не правильно')
 
 
-# local_serv = requests.get("https://www.cbr.ru")
-# print(local_serv.json())
+class MyValidationPostgres(MyRaduga):
+    __engine = sqal.create_engine("postgresql://gin:1337@localhost:8000/log_user", echo=False)
+    __meta = sqal.MetaData(bind=__engine, schema='users')
+    __user = sqal.Table('users', __meta, autoload=True)
+
+    __s = __user.select()
+    __r = __engine.execute(__s)
+    __t = __r.fetchall()
+    __user_type = input('Введите логин: ')
+
+    __z = list(i[1] for i in __t)
+    __p = list(i[2] for i in __t)
+    print(__t)
+
+    def my_raduga(self) -> None:
+        match self.__z:
+            case [*args] if self.__user_type == 'root' and self.__user_type in self.__z:
+                if input('Введите пароль: ') in self.__p:
+                    ins = self.__user.insert().values(
+                        id_user=input('id_user: '),
+                        user_name=input('user_name: '),
+                        user_password=input('user_password: '),
+                        user_role=input('user_role: '),
+                        user_mailadress=input('user_mailadress: '),
+                        user_status=1
+                    )
+                    self.__engine.execute(ins)
+            case [*args] if self.__user_type in self.__z:
+                pas = input('Введите пароль: ')
+                if pas in self.__p:
+                    MyRaduga.extra_map(self, self.value)
+            case _:
+                print('Неверный логин или пароль.')
+        if self.__user_type in self.__z:
+            print('da')
+        else:
+            print('net')
+
+    __hashus = {"users": hashlib.md5(str(__t).encode("utf-8")).hexdigest()}
+    with open("files/hash.json", "w") as hsh:
+        json.dump(__hashus, hsh)
 
 
+b = MyValidationPostgres(list_to_sum)
+b.my_raduga()
+
+
+# HW 32
+
+class MyValidation:
+
+    def __validation_json(self) -> dict:
+        """
+        Функция проводит валидацию логина пароля админа
+        и после правлиьного ввода позволяет добавить
+        новых пользователей и добавляет в их хеш файл hash.json.
+        """
+        with open("files/test2.json") as tst:
+            data = json.load(tst)
+            print(data)
+            login = input()
+            if login in data.keys():
+                password = input()
+                if password == data[login]:
+                    users = json.load(open("files/usersID.json"))
+                    with open("files/usersID.json", "w") as uID:
+                        for i in range(1):
+                            i = input()
+                            users[i] = input()
+                        json.dump(users, uID)
+        hashus = {"users": hashlib.md5(str(users).encode("utf-8")).hexdigest()}
+        with open("files/hash.json", "w") as hsh:
+            json.dump(hashus, hsh)
+        return users
+
+
+list_to_map = [2, 0, 4, 5, 1, 6, 9]
+
+
+
+
+# a = MyRaduga(MyValidation)
+# a.extra_map(list_to_map)
