@@ -814,6 +814,12 @@ class MyRaduga:
 
 
 class MyValidationPostgres(MyRaduga):
+    """
+    Класс MyValidationPostgres является дочерним класса MyRaduga
+    и создает движок бд postgres а далее
+    на основе данных с бд проверяет валидацию юзеров,
+    после успешного прохождения валидации вызывает метод родительского класса extra_map.
+    """
     __engine = sqal.create_engine("postgresql://gin:1337@localhost:8000/log_user", echo=False)
     __meta = sqal.MetaData(bind=__engine, schema='users')
     __user = sqal.Table('users', __meta, autoload=True)
@@ -825,7 +831,6 @@ class MyValidationPostgres(MyRaduga):
 
     __z = list(i[1] for i in __t)
     __p = list(i[2] for i in __t)
-    print(__t)
 
     def my_raduga(self) -> None:
         match self.__z:
@@ -846,10 +851,6 @@ class MyValidationPostgres(MyRaduga):
                     MyRaduga.extra_map(self, self.value)
             case _:
                 print('Неверный логин или пароль.')
-        if self.__user_type in self.__z:
-            print('da')
-        else:
-            print('net')
 
     __hashus = {"users": hashlib.md5(str(__t).encode("utf-8")).hexdigest()}
     with open("files/hash.json", "w") as hsh:
